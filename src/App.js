@@ -1,28 +1,33 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import 'bootstrap/dist/css/bootstrap.css';
+
+// import logo from './logo.svg';
 import './App.css';
+import HomeWithAuth from './Home.js';
 
 class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
-  }
+    constructor(props) {
+        super(props);
+        this.state = {
+            isLoggedIn: true,
+        };
+        this.logIn = this.logIn.bind(this);
+    }
+
+    render() {
+        return (
+            <HomeWithAuth 
+                logIn={this.logIn} 
+                isLoggedIn={this.state.isLoggedIn}
+            />
+        );
+    }
+
+    logIn() {
+        this.setState({
+            isLoggedIn: true,
+        });
+    }
 }
 
 export default App;
