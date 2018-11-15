@@ -15,12 +15,12 @@ class Index extends Component {
                             <h1>Bienvenido</h1>
                             <h3>¿Qué deseas hacer?</h3>
 
-                            <Link to="/new-doc/" className="btn btn-primary btn-lg btn-block">
-                                Nueva factura
+                            <Link to="/docs/" className="btn btn-primary btn-lg btn-block">
+                                Nuevo documento
                             </Link>
 
                             <Link to="/drive/" className="btn btn-secondary btn-lg btn-block">
-                                Consultar facturas
+                                Consultar documentos
                             </Link>
                         </div>
                     </div>
@@ -36,7 +36,7 @@ class Home extends Component {
             <Router>
                 <Switch>
                     <Route path="/" exact component={Index} />
-                    <Route path="/new-doc/" component={NewDocScreen} />
+                    <Route path="/docs/" component={NewDocScreen} />
                     {/* <Route path="/users/" component={Users} /> */}
                 </Switch>
             </Router>
