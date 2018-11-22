@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import './Home.css';
 import AuthWrapper from './AuthWrapper.js';
 import NewDocScreen from './NewDocScreen.js';
+import DriveScreen from './DriveScreen.js';
 
 class Index extends Component {
     render() {
@@ -37,7 +38,7 @@ class Home extends Component {
                 <Switch>
                     <Route path="/" exact component={Index} />
                     <Route path="/docs/" component={NewDocScreen} />
-                    {/* <Route path="/users/" component={Users} /> */}
+                    <Route path="/drive/" component={DriveScreen} />
                 </Switch>
             </Router>
         )
