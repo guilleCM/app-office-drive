@@ -1,8 +1,13 @@
 .NewDocScreen {
-    background-color: #f9f9f9;
+    background-color: #E5E5E5;
     min-height: 100vh;
     color: black;
 }
+.card {
+    -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+}
+/* TABLE */
 .ConceptsTable {
     position: relative;
     display: -webkit-box;
@@ -127,4 +132,12 @@
     border-right: 1px solid rgba(0,0,0,0.02);
     flex: 100 0 auto;
     width: 100px;
+}
+
+.btn-cp-tr-remove {
+    border-radius: 50%;
+    position: absolute;
+    left: -25px;
+    margin-top: -3px;
+    box-shadow: 1px 1px 10px 1px #000000bf;
 }

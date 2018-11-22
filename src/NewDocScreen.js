@@ -13,6 +13,7 @@ class ConceptsTable extends Component {
         this.openNewConceptForm = this.openNewConceptForm.bind(this);
         this.closeNewConceptForm = this.closeNewConceptForm.bind(this);
         this.addNewConcept = this.addNewConcept.bind(this);
+
         this.descriptionInputRef = React.createRef();
         this.costInputRef = React.createRef();
     }    
@@ -38,7 +39,12 @@ class ConceptsTable extends Component {
                                     <div key={index} className="cp-tr-group">
                                         <div className="cp-tr">
                                             <div className="cp-td" style={{minWidth: '70%'}}>
-                                                <span style={{whiteSpace: 'pre-wrap'}}>{concept.description}</span>
+                                                <span style={{whiteSpace: 'pre-wrap'}}>
+                                                    <div className="btn btn-sm btn-danger btn-cp-tr-remove" title="Borrar concepto">
+                                                        <i className="fas fa-trash"/>
+                                                    </div>
+                                                    {" " + concept.description}
+                                                </span>
                                             </div>
                                             <div className="cp-td" style={{margin: 'auto', textAlign: 'center'}}>
                                                 <span>{concept.cost} €</span>
@@ -141,7 +147,7 @@ class NewDocScreen extends Component {
                 <div className="container-fluid">
                     <div className="row">
                         <div className="col-12 col-md-10 offset-md-1 col-lg-8 offset-lg-2">
-                            <h1>Nuevo documento</h1>
+                            <h2>Nuevo documento</h2>
                         </div>
                         <div className="col-12 col-md-10 offset-md-1 col-lg-8 offset-lg-2" style={{paddingBottom: '2rem'}}>
                             <form onSubmit={(e) => this.handleSubmit(e)}>
@@ -159,6 +165,7 @@ class NewDocScreen extends Component {
                                         <div className="form-group">
                                             <label htmlFor="client_name">Nombre:</label>
                                             <input 
+                                                required
                                                 type="text" 
                                                 className="form-control" 
                                                 id="client_name" 
@@ -168,6 +175,7 @@ class NewDocScreen extends Component {
                                         <div className="form-group">
                                             <label htmlFor="client_address">Dirección:</label>
                                             <input 
+                                                required
                                                 type="text" 
                                                 className="form-control" 
                                                 id="client_address" 
@@ -178,6 +186,7 @@ class NewDocScreen extends Component {
                                             <div className="form-group col-12 col-sm-2">
                                                 <label htmlFor="client_zip_code">CP:</label>
                                                 <input 
+                                                    required
                                                     pattern="[0-9]{5}"
                                                     type="text" 
                                                     maxLength={5}
@@ -189,6 +198,7 @@ class NewDocScreen extends Component {
                                             <div className="form-group col-12 col-sm-10">
                                                 <label htmlFor="client_city">Ciudad:</label>
                                                 <input 
+                                                    required
                                                     type="text" 
                                                     className="form-control" 
                                                     id="client_city" 
@@ -198,7 +208,8 @@ class NewDocScreen extends Component {
                                         </div>
                                         <div className="form-group">
                                             <label htmlFor="client_cif">CIF:</label>
-                                            <input 
+                                            <input
+                                                required
                                                 type="text" 
                                                 className="form-control" 
                                                 id="client_address" 
