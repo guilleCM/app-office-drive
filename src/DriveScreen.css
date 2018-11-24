@@ -1,0 +1,10 @@
+.folder-wrapper {
+    cursor: pointer;
+}
+.folder-label {
+    margin-bottom: 0;
+}
+.folder-icon {
+    color: #ffad46;
+    margin-right: 5px;
+}

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 
+import download from './download.js';
 import './NewDocScreen.css';
 
 class ConceptsTable extends Component {
@@ -140,7 +141,7 @@ class ConceptsTable extends Component {
     }
 }
 
-class NewDocScreen extends Component {
+class ViewDocScreen extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -150,6 +151,13 @@ class NewDocScreen extends Component {
         this.sendData = this.sendData.bind(this);
 
         this.conceptsTableRef = React.createRef();
+    }
+    componentDidMount() {
+        //TODO
+        console.log("IMPLEMENTAR VER PDF O FACTURA / EDITABLE ? IMPRIMIR?")
+        // fetch('/pdf')
+        // .then(response => response.blob())
+        // .then(blob => download(blob))
     }
     render() {
         const today = new Date();
@@ -288,8 +296,8 @@ class NewDocScreen extends Component {
     sendData(jsonData) {
         //todo send ajax
         console.log("on complete ajax");
-        this.props.history.push('/docs/id')
+        // this.props.history.push('/docs/'+'id')
     }
 }
 
-export default NewDocScreen;
+export default ViewDocScreen;
