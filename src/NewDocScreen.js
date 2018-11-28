@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
+import axios from 'axios';
 
 import './NewDocScreen.css';
 
@@ -287,8 +288,12 @@ class NewDocScreen extends Component {
     }
     sendData(jsonData) {
         //todo send ajax
-        console.log("on complete ajax");
-        this.props.history.push('/docs/id')
+        axios.put('/doc/', jsonData)
+            .then((res) => {
+                console.log(res)
+            })
+        // console.log("on complete ajax");
+        // this.props.history.push('/docs/id')
     }
 }
 
