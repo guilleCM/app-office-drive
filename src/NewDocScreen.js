@@ -101,9 +101,9 @@ class ConceptsTable extends Component {
                     <div style={{textAlign: 'right', marginTop: '1rem'}}>
                         <label>Resumen:</label>
                         <ul style={{listStyle: 'none', marginBottom: 0}}>
-                            <li>Importe Trabajo: {totalCost} €</li>
-                            <li>21% de IVA: {totalCost * 0.21} €</li>
-                            <li>TOTAL: {(totalCost * 0.21) + totalCost} €</li>
+                            <li>Importe Trabajo: <b>{totalCost.toFixed(2)}</b> €</li>
+                            <li>21% de IVA: <b>{(totalCost * 0.21).toFixed(2)}</b> €</li>
+                            <li>TOTAL: <b>{((totalCost * 0.21) + totalCost).toFixed(2)}</b> €</li>
                         </ul>
                     </div>
                 }
@@ -290,8 +290,8 @@ class NewDocScreen extends Component {
             doc_type_description: document.getElementById('doc_type_description').value, 
             concepts: this.conceptsTableRef.current.state.concepts,
             concepts_cost: totalCost,
-            IVA_percent: 0.21,
-            IVA_cost: totalCost * 0.21,
+            iva_percent: 0.21,
+            iva_cost: totalCost * 0.21,
             total_cost: (totalCost * 0.21) + totalCost,
         }
         let jsonData = JSON.stringify(dataToSend).toLowerCase();
