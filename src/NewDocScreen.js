@@ -103,7 +103,7 @@ class ConceptsTable extends Component {
                         <ul style={{listStyle: 'none', marginBottom: 0}}>
                             <li>Importe Trabajo: {totalCost} €</li>
                             <li>21% de IVA: {totalCost * 0.21} €</li>
-                            <li>TOTAL: {totalCost * 0.21 + totalCost} €</li>
+                            <li>TOTAL: {(totalCost * 0.21) + totalCost} €</li>
                         </ul>
                     </div>
                 }
@@ -273,7 +273,14 @@ class NewDocScreen extends Component {
     }
     handleSubmit(event) {
         event.preventDefault();
+        let totalCost = this.conceptsTableRef.current.state.concepts.length > 0 ? this.conceptsTableRef.current.state.concepts.reduce((a, b) => {return {cost: a.cost + b.cost}}).cost : 0;
         let dataToSend = {
+            emitter_name: "DITANA Servicios SL",
+            emitter_address: "C/ Manobre n 28, Local 2",
+            emitter_zip_code: "07008",
+            emitter_city: "Palma de Mallorca",
+            emitter_tel: "656716108",
+            emitter_nif: "B57743734",
             client_name: document.getElementById('client_name').value,
             client_address: document.getElementById('client_address').value,
             client_zip_code: document.getElementById('client_zip_code').value,
@@ -281,10 +288,14 @@ class NewDocScreen extends Component {
             client_cif: document.getElementById('client_cif').value,
             doc_type: document.getElementById('doc_type').value,
             doc_type_description: document.getElementById('doc_type_description').value, 
-            concepts: this.conceptsTableRef.current.state.concepts   
+            concepts: this.conceptsTableRef.current.state.concepts,
+            concepts_cost: totalCost,
+            IVA_percent: 0.21,
+            IVA_cost: totalCost * 0.21,
+            total_cost: (totalCost * 0.21) + totalCost,
         }
         let jsonData = JSON.stringify(dataToSend).toLowerCase();
-        this.sendData(jsonData);
+        this.sendData(JSON.parse(jsonData));
     }
     sendData(jsonData) {
         //todo send ajax
