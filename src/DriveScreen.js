@@ -4,6 +4,7 @@ import axios from 'axios';
 
 import './NewDocScreen.css';
 import './DriveScreen.css';
+import download from './download.js';
 
 const Folder = ({ label, onClickHandler }) => (
     <div className="col-12 col-sm-6 col-md-4 col-lg-3" onClick={() => onClickHandler(label)}>
@@ -71,6 +72,9 @@ class DocumentsScreen extends Component {
     }
     handleDocumentClick(id) {
         console.log("PDF")
+        fetch('/docs/GetPdf?id='+id)
+        .then(response => response.blob())
+        .then(blob => download(blob))
     }
 }
 
