@@ -39,7 +39,8 @@ class Home extends Component {
                     <Route exact path="/" component={Index} />
                     <Route exact path="/docs/" component={NewDocScreen} />
                     <Route exact path="/docs/:doc_id" component={NewDocScreen} />
-                    <Route path="/drive/" component={DriveScreen} />
+                    <Route exact path="/drive/" component={DriveScreen} />
+                    <Route exact path="/drive/folder/:year" component={DriveScreen} />
                     {/* <Route component={NoMatch}/> */}
                 </Switch>
             </Router>

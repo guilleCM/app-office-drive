@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 import './NewDocScreen.css';
 
@@ -141,6 +142,30 @@ class ConceptsTable extends Component {
     }
 }
 
+class DocumentCount extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            count: null
+        }
+    }
+    componentDidMount() {
+        axios.get('/docs/CountByYear')
+        .then((res) => {
+            this.setState({
+                count: res.data.count+1
+            })
+        })
+    }
+    render() {
+        return (
+            <span>
+                {this.state.count !== null ? this.state.count : <i className="fas fa-spinner fa-spin"/>}
+            </span>
+        )
+    }
+}
+
 class NewDocScreen extends Component {
     constructor(props) {
         super(props);
@@ -166,7 +191,7 @@ class NewDocScreen extends Component {
 
                                 <div className="card" style={{marginBottom: '1rem'}}>
                                     <div className="card-body">
-                                        <h6 className="card-subtitle mb-2 text-muted">Presupuesto nº <b>100</b> de <b>{today.getFullYear()}</b></h6>
+                                        <h6 className="card-subtitle mb-2 text-muted">Presupuesto nº <b><DocumentCount/></b> de <b>{today.getFullYear()}</b></h6>
                                         <h6 style={{marginBottom: 0}} className="card-subtitle text-muted">Fecha: <b>{today.toLocaleDateString()}</b></h6>
                                     </div>
                                 </div>
@@ -257,7 +282,7 @@ class NewDocScreen extends Component {
                                     </div>
                                 </div>
 
-                            <button type="submit" className="btn btn-secondary">Guardar</button>
+                            <button style={{marginRight: '1rem'}} type="submit" className="btn btn-secondary">Guardar</button>
 
                             <Link to="/" className="btn btn-danger">
                                 Cancelar
@@ -273,6 +298,7 @@ class NewDocScreen extends Component {
     }
     handleSubmit(event) {
         event.preventDefault();
+        document.getElementById('App-Loader').style.display = 'block';
         let totalCost = this.conceptsTableRef.current.state.concepts.length > 0 ? this.conceptsTableRef.current.state.concepts.reduce((a, b) => {return {cost: a.cost + b.cost}}).cost : 0;
         let dataToSend = {
             emitter_name: "DITANA Servicios SL",
@@ -298,13 +324,21 @@ class NewDocScreen extends Component {
         this.sendData(JSON.parse(jsonData));
     }
     sendData(jsonData) {
-        //todo send ajax
-        axios.put('/doc/', jsonData)
+        let that = this;
+        axios.put('/docs/', jsonData)
             .then((res) => {
                 console.log(res)
+                document.getElementById('App-Loader').style.display = 'none';
+                if (res.status === 200 && res.data.status === 'ok') {
+                    
+                    // that.props.history.push('/docs/'+res.data.id);
+                    toast.success('Documento guardado correctamente!');
+                    that.props.history.push('/');
+                }
+                else {
+                    toast.error('No se ha podido guardar!');
+                }
             })
-        // console.log("on complete ajax");
-        // this.props.history.push('/docs/id')
     }
 }
 
