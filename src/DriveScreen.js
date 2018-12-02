@@ -26,11 +26,11 @@ const Folder = ({ label, onClickHandler }) => (
 //         </div>
 //     }
 // }
-const Document = ({ label, onClickHandler }) => (
-    <div className="col-12 col-sm-6 col-md-4 col-lg-3" style={{marginBottom: '0.5rem'}} onClick={() => onClickHandler(label)}>
+const Document = ({ label, apiEndPoint, onClickHandler }) => (
+    <div className="col-12 col-sm-6 col-md-4 col-lg-3" style={{marginBottom: '0.5rem'}} onClick={() => onClickHandler(apiEndPoint)}>
         <div className="card folder-wrapper">
             <div className="card-body" style={{padding: '0.4rem'}}>
-                <span className="folder-label"><i className="fas fa-file-invoice invoice-icon"/>{label}</span>
+                <span className="folder-label"><i className="fas fa-file-alt invoice-icon"/>{label}</span>
             </div>
         </div>
     </div>
@@ -62,8 +62,9 @@ class DocumentsScreen extends Component {
             <div className="row" style={{marginTop: '1rem'}}>
                 {this.state.documents.map((doc => 
                     <Document 
-                        key={doc.id} 
-                        label={doc.id} 
+                        key={doc.id}
+                        apiEndPoint={doc.id}
+                        label={doc.client_name} 
                         onClickHandler={this.handleDocumentClick}
                     />
                 ))}
@@ -71,10 +72,13 @@ class DocumentsScreen extends Component {
         )
     }
     handleDocumentClick(id) {
-        console.log("PDF")
+        document.getElementById('App-Loader').style.display = 'block';
         fetch('/docs/GetPdf?id='+id)
         .then(response => response.blob())
-        .then(blob => download(blob))
+        .then(blob => {
+            download(blob, 'factura');
+            document.getElementById('App-Loader').style.display = 'none';
+        })
     }
 }
 
