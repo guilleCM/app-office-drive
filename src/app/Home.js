@@ -3,8 +3,8 @@ import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 
 import './Home.css';
 import AuthWrapper from './AuthWrapper.js';
-import NewDocScreen from './NewDocScreen.js';
-import DriveScreen from './DriveScreen.js';
+import NewDocScreen from './../docs/NewDocScreen.js';
+import DriveScreen from './../drive/DriveScreen.js';
 
 class Index extends Component {
     render() {
@@ -33,14 +33,15 @@ class Index extends Component {
 
 class Home extends Component {
     render() {
+        const auth = {...this.props};
         return (
             <Router>
                 <Switch>
-                    <Route exact path="/" component={Index} />
-                    <Route exact path="/docs/" component={NewDocScreen} />
-                    <Route exact path="/docs/:doc_id" component={NewDocScreen} />
-                    <Route exact path="/drive/" component={DriveScreen} />
-                    <Route exact path="/drive/folder/:year" component={DriveScreen} />
+                    <Route exact path="/" render={(props) => (<Index {...props} auth={auth}/>)} />
+                    <Route exact path="/docs/" render={(props) => (<NewDocScreen {...props} auth={auth}/>)} />
+                    <Route exact path="/docs/:doc_id" render={(props) => (<NewDocScreen {...props} auth={auth}/>)} />
+                    <Route exact path="/drive/" render={(props) => (<DriveScreen {...props} auth={auth}/>)} />
+                    <Route exact path="/drive/folder/:year" render={(props) => (<DriveScreen {...props} auth={auth}/>)} />
                     {/* <Route component={NoMatch}/> */}
                 </Switch>
             </Router>

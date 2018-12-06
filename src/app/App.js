@@ -21,7 +21,10 @@ class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            isLoggedIn: true,
+            isLoggedIn: false,
+            user: null,
+            access_token: null,
+            refresh_token: null,
         };
         this.logIn = this.logIn.bind(this);
     }
@@ -43,14 +46,20 @@ class App extends Component {
                 <HomeWithAuth 
                     logIn={this.logIn} 
                     isLoggedIn={this.state.isLoggedIn}
+                    user={this.state.user}
+                    access_token={this.state.access_token}
+                    refresh_token={this.state.access_token}
                 />
             </React.Fragment>
         );
     }
 
-    logIn() {
+    logIn(user_data, access_token, refresh_token) {
         this.setState({
             isLoggedIn: true,
+            user: user_data,
+            access_token: access_token,
+            refresh_token: refresh_token,
         });
     }
 }

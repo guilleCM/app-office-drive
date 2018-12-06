@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 // import { Link } from "react-router-dom";
 
-import './NewDocScreen.css';
+import './../docs/NewDocScreen.css';
 import './DriveScreen.css';
 import download from './download.js';
 
