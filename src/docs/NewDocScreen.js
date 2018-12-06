@@ -325,7 +325,12 @@ class NewDocScreen extends Component {
     }
     sendData(jsonData) {
         let that = this;
-        axios.put('/docs/', jsonData)
+        let config = {
+            headers: {
+                Authorization: 'Bearer ' + this.props.auth.access_token,
+            }
+        }
+        axios.put('/docs/', jsonData, config)
             .then((res) => {
                 console.log(res)
                 document.getElementById('App-Loader').style.display = 'none';
