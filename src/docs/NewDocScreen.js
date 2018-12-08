@@ -150,7 +150,7 @@ class DocumentCount extends Component {
         }
     }
     componentDidMount() {
-        axios.get('/docs/CountByYear')
+        axios.get('/docs/CountByYear?year='+this.props.year)
         .then((res) => {
             this.setState({
                 count: res.data.count+1
@@ -191,7 +191,7 @@ class NewDocScreen extends Component {
 
                                 <div className="card" style={{marginBottom: '1rem'}}>
                                     <div className="card-body">
-                                        <h6 className="card-subtitle mb-2 text-muted">Presupuesto nº <b><DocumentCount/></b> de <b>{today.getFullYear()}</b></h6>
+                                        <h6 className="card-subtitle mb-2 text-muted">Presupuesto nº <b><DocumentCount year={today.getFullYear()}/></b> de <b>{today.getFullYear()}</b></h6>
                                         <h6 style={{marginBottom: 0}} className="card-subtitle text-muted">Fecha: <b>{today.toLocaleDateString()}</b></h6>
                                     </div>
                                 </div>
