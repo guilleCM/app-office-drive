@@ -16,11 +16,12 @@ const Folder = ({ label, onClickHandler }) => (
     </div>
 );
 
-const Document = ({ label, apiEndPoint, onClickHandler }) => (
-    <div className="col-12 col-sm-6 col-md-4 col-lg-3" style={{marginBottom: '1rem'}} onClick={() => onClickHandler(apiEndPoint)}>
+const Document = ({ label, apiEndPoint, date, onClickHandler }) => (
+    <div className="" style={{marginBottom: '1rem'}} onClick={() => onClickHandler(apiEndPoint)}>
         <div className="card folder-wrapper">
             <div className="card-body" style={{padding: '0.4rem'}}>
-                <span className="folder-label"><i className="fas fa-file-alt invoice-icon"/>{label}</span>
+                <span className="folder-label"><i className="fas fa-file invoice-icon"/>{label}</span>
+                {/* <span style={{marginLeft: 5}}><i className="far fa-calendar-alt invoice-icon    "/>{date}</span> */}
             </div>
         </div>
     </div>
@@ -61,14 +62,34 @@ class DocumentsScreen extends Component {
         }
         return(
             <div className="row" style={{marginTop: '1rem'}}>
-                {this.state.documents.map((doc => 
-                    <Document 
-                        key={doc.id}
-                        apiEndPoint={doc.id}
-                        label={doc.client_name} 
-                        onClickHandler={this.handleDocumentClick}
-                    />
-                ))}
+                {months.slice(0).reverse().map(month => {
+                    if (month in documents) {
+                        let docs = documents[month].map((doc =>
+                            <Document 
+                                key={doc.id}
+                                apiEndPoint={doc.id}
+                                label={doc.client_name} 
+                                //date={doc.c_date.substr(8, 2)}
+                                onClickHandler={this.handleDocumentClick}
+                            />
+                        ))
+                        return (
+                            <div key={month} className="col-12" style={{marginBottom: '1rem'}}>
+                                <div className="card">
+                                    <div className="card-body">
+                                        <h5 className="card-subtitle mb-2 text-muted">
+                                            <i style={{marginRight: '0.5rem'}}className="fas fa-folder-open"/>{month}
+                                        </h5>
+                                        {docs}
+                                    </div>
+                                </div>
+                            </div>
+                        )
+                    }
+                    else {
+                        return null
+                    }
+                })}
             </div>
         )
     }
@@ -131,7 +152,7 @@ class DriveScreen extends Component {
                     </div>
 
                     {this.props.match.params.year === undefined && this.state.years.length > 0 &&
-                        this.state.years.map(year => 
+                        this.state.years.slice(0).reverse().map(year => 
                             <div key={year} className="row" style={{marginTop: '1rem'}}>
                                 <Folder 
                                     label={year}

@@ -13,7 +13,7 @@ class Index extends Component {
                 <div className="container-fluid">
                     <div className="row">
                         <div className="col-12">
-                            <h1>Bienvenido</h1>
+                            <h1 style={{marginTop: '1rem'}}>Bienvenido</h1>
                             <h3>¿Qué deseas hacer?</h3>
 
                             <Link to="/docs/" className="btn btn-primary btn-lg btn-block">

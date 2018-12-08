@@ -7,7 +7,6 @@ function AuthWrapper(WrappedComponent) {
         handleSubmit(event) {
             event.preventDefault();
             document.getElementById('App-Loader').style.display = 'block';
-            let that = this;
             let username = document.getElementById('username').value;
             let password = document.getElementById('password').value;
             let dataToSend = {
