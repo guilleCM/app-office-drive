@@ -150,7 +150,12 @@ class DocumentCount extends Component {
         }
     }
     componentDidMount() {
-        axios.get('/docs/CountByYear?year='+this.props.year)
+        let config = {
+            headers: {
+                Authorization: 'Bearer ' + this.props.auth.access_token,
+            }
+        }
+        axios.get('/docs/CountByYear?year='+this.props.year, config)
         .then((res) => {
             this.setState({
                 count: res.data.count+1
@@ -191,7 +196,9 @@ class NewDocScreen extends Component {
 
                                 <div className="card" style={{marginBottom: '1rem'}}>
                                     <div className="card-body">
-                                        <h6 className="card-subtitle mb-2 text-muted">Presupuesto nº <b><DocumentCount year={today.getFullYear()}/></b> de <b>{today.getFullYear()}</b></h6>
+                                        <h6 className="card-subtitle mb-2 text-muted">
+                                            Presupuesto nº <b><DocumentCount auth={this.props.auth} year={today.getFullYear()}/></b> de <b>{today.getFullYear()}</b>
+                                        </h6>
                                         <h6 style={{marginBottom: 0}} className="card-subtitle text-muted">Fecha: <b>{today.toLocaleDateString()}</b></h6>
                                     </div>
                                 </div>
@@ -301,12 +308,6 @@ class NewDocScreen extends Component {
         document.getElementById('App-Loader').style.display = 'block';
         let totalCost = this.conceptsTableRef.current.state.concepts.length > 0 ? this.conceptsTableRef.current.state.concepts.reduce((a, b) => {return {cost: a.cost + b.cost}}).cost : 0;
         let dataToSend = {
-            emitter_name: "DITANA Servicios SL",
-            emitter_address: "C/ Manobre n 28, Local 2",
-            emitter_zip_code: "07008",
-            emitter_city: "Palma de Mallorca",
-            emitter_tel: "656716108",
-            emitter_nif: "B57743734",
             client_name: document.getElementById('client_name').value,
             client_address: document.getElementById('client_address').value,
             client_zip_code: document.getElementById('client_zip_code').value,

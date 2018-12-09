@@ -37,7 +37,12 @@ class DocumentsScreen extends Component {
     }
     componentDidMount() {
         document.getElementById('App-Loader').style.display = 'block';
-        axios.get('/docs/FilterByYear?year='+this.props.filters.year)
+        let config = {
+            headers: {
+                Authorization: 'Bearer ' + this.props.auth.access_token,
+            }
+        }
+        axios.get('/docs/FilterByYear?year='+this.props.filters.year, config)
         .then((res) => {
             document.getElementById('App-Loader').style.display = 'none';
             this.setState({
@@ -95,7 +100,9 @@ class DocumentsScreen extends Component {
     }
     handleDocumentClick(id) {
         document.getElementById('App-Loader').style.display = 'block';
-        fetch('/docs/GetPdf?id='+id)
+        fetch('/docs/GetPdf?id='+id, {headers: new Headers({
+            'Authorization': 'Bearer ' + this.props.auth.access_token,
+        })})
         .then(response => response.blob())
         .then(blob => {
             download(blob, 'factura');
@@ -114,7 +121,12 @@ class DriveScreen extends Component {
     }
     componentDidMount() {
         document.getElementById('App-Loader').style.display = 'block';
-        axios.get('/docs/DistinctSetOfYears')
+        let config = {
+            headers: {
+                Authorization: 'Bearer ' + this.props.auth.access_token,
+            }
+        }
+        axios.get('/docs/DistinctSetOfYears', config)
         .then((res) => {
             document.getElementById('App-Loader').style.display = 'none';
             this.setState({
@@ -163,6 +175,7 @@ class DriveScreen extends Component {
                     }
                     {this.props.match.params.year !== undefined &&
                         <DocumentsScreen 
+                            auth={this.props.auth}
                             filters={{year: this.props.match.params.year}}
                         />
                     }
