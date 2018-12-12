@@ -28,5 +28,6 @@
     "not ie <= 11",
     "not op_mini all"
   ],
-  "proxy": "http://app-office-drive.appspot.com/"
+  "proxy": "http://app-office-drive.appspot.com/",
+  "devProxy": "http://app-office-drive.appspot.com/"
 }
