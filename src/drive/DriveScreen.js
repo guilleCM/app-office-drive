@@ -42,7 +42,7 @@ class DocumentsScreen extends Component {
                 Authorization: 'Bearer ' + this.props.auth.access_token,
             }
         }
-        axios.get('/docs/FilterByYear?year='+this.props.filters.year, config)
+        axios.get('https://app-office-drive.appspot.com/docs/FilterByYear?year='+this.props.filters.year, config)
         .then((res) => {
             document.getElementById('App-Loader').style.display = 'none';
             this.setState({
@@ -100,7 +100,7 @@ class DocumentsScreen extends Component {
     }
     handleDocumentClick(id) {
         document.getElementById('App-Loader').style.display = 'block';
-        fetch('/docs/GetPdf?id='+id, {headers: new Headers({
+        fetch('https://app-office-drive.appspot.com/docs/GetPdf?id='+id, {headers: new Headers({
             'Authorization': 'Bearer ' + this.props.auth.access_token,
         })})
         .then(response => response.blob())
@@ -126,7 +126,7 @@ class DriveScreen extends Component {
                 Authorization: 'Bearer ' + this.props.auth.access_token,
             }
         }
-        axios.get('/docs/DistinctSetOfYears', config)
+        axios.get('https://app-office-drive.appspot.com/docs/DistinctSetOfYears', config)
         .then((res) => {
             document.getElementById('App-Loader').style.display = 'none';
             this.setState({

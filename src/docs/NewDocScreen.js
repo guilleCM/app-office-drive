@@ -159,7 +159,7 @@ class DocumentCount extends Component {
                 Authorization: 'Bearer ' + this.props.auth.access_token,
             }
         }
-        axios.get('/docs/CountByYear?year='+this.props.year, config)
+        axios.get('https://app-office-drive.appspot.com/docs/CountByYear?year='+this.props.year, config)
         .then((res) => {
             this.setState({
                 count: res.data.count+1
@@ -341,7 +341,7 @@ class NewDocScreen extends Component {
                 Authorization: 'Bearer ' + this.props.auth.access_token,
             }
         }
-        axios.put('/docs/', jsonData, config)
+        axios.put('https://app-office-drive.appspot.com/docs/', jsonData, config)
             .then((res) => {
                 console.log(res)
                 document.getElementById('App-Loader').style.display = 'none';
