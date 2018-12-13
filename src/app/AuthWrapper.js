@@ -37,7 +37,7 @@ function AuthWrapper(WrappedComponent) {
                 'password': password,
             };
             // let jsonData = JSON.stringify(dataToSend);
-            axios.post('/users/login', dataToSend)
+            axios.post('https://app-office-drive.appspot.com/users/login', dataToSend)
                 .then((res) => {
                     console.log(res)
                     document.getElementById('App-Loader').style.display = 'none';
