@@ -42,12 +42,16 @@ class ConceptsTable extends Component {
                                     <div key={index} className="cp-tr-group">
                                         <div className="cp-tr">
                                             <div className="cp-td" style={{minWidth: '70%'}}>
-                                                <span style={{whiteSpace: 'pre-wrap'}}>
-                                                    <div onClick={() => this.removeConcept(index)} className="btn btn-sm btn-danger btn-cp-tr-remove" title="Borrar concepto">
-                                                        <i className="fas fa-trash"/>
-                                                    </div>
-                                                    {" " + concept.description}
-                                                </span>
+                                                <div 
+                                                    onClick={() => this.removeConcept(index)} 
+                                                    className="btn btn-sm btn-danger btn-cp-tr-remove" 
+                                                    title="Borrar concepto"
+                                                >
+                                                    <i className="fas fa-trash"/>
+                                                </div>
+                                                <p style={{whiteSpace: 'pre-wrap', marginBottom: 0, textIndent: 32}}>
+                                                    {concept.description}
+                                                </p>
                                             </div>
                                             <div className="cp-td" style={{margin: 'auto', textAlign: 'center'}}>
                                                 <span>{concept.cost} €</span>
@@ -74,7 +78,7 @@ class ConceptsTable extends Component {
                 {!this.state.newConceptForm &&
                     <button 
                         style={{marginTop: 10}} 
-                        className="btn btn-primary btn-block"
+                        className="btn btn-dark btn-block"
                         onClick={this.openNewConceptForm}
                     >
                         Añadir nuevo concepto
@@ -84,7 +88,7 @@ class ConceptsTable extends Component {
                     <React.Fragment>
                         <button 
                             style={{marginTop: 10}} 
-                            className="btn btn-primary col-5"
+                            className="btn btn-dark col-5"
                             onClick={this.addNewConcept}
                         >
                             Añadir
@@ -191,7 +195,7 @@ class NewDocScreen extends Component {
                         <div className="col-12 col-md-10 offset-md-1 col-lg-8 offset-lg-2">
                             <h2>Nuevo documento</h2>
                         </div>
-                        <div className="col-12 col-md-10 offset-md-1 col-lg-8 offset-lg-2" style={{paddingBottom: '2rem'}}>
+                        <div className="form-wrapper col-12 col-md-10 offset-md-1 col-lg-8 offset-lg-2" style={{paddingBottom: '2rem'}}>
                             <form onSubmit={(e) => this.handleSubmit(e)}>
 
                                 <div className="card" style={{marginBottom: '1rem'}}>
@@ -288,12 +292,18 @@ class NewDocScreen extends Component {
 
                                     </div>
                                 </div>
-
-                            <button style={{marginRight: '1rem'}} type="submit" className="btn btn-secondary">Guardar</button>
-
-                            <Link to="/" className="btn btn-danger">
-                                Cancelar
-                            </Link>
+                            <div className="form-wrapper-footer">
+                                <button 
+                                    style={{marginRight: '1rem'}} 
+                                    type="submit" 
+                                    className="btn btn-primary"
+                                >   
+                                    Guardar
+                                </button>
+                                <Link to="/" className="btn btn-danger">
+                                    Cancelar
+                                </Link>
+                            </div>
 
                             </form>
 

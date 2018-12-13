@@ -7,6 +7,19 @@
     -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
 }
+@media (max-width: 576px) {
+    .form-wrapper {
+        padding-left: 0;
+        padding-right: 0;
+    }
+    .form-wrapper-footer {
+        text-align: center;
+    }
+    .ConceptsTable {
+        margin-left: -1.25rem;
+        margin-right: -1.25rem;
+    }
+}
 /* TABLE */
 .ConceptsTable {
     position: relative;
@@ -137,7 +150,7 @@
 .btn-cp-tr-remove {
     border-radius: 50%;
     position: absolute;
-    left: -25px;
+    left: 3px;
     margin-top: -3px;
     box-shadow: 1px 1px 10px 1px #000000bf;
 }
